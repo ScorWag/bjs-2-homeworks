@@ -15,8 +15,26 @@ function solveEquation(a, b, c) {
 }
 
 function calculateTotalMortgage(percent, contribution, amount, date) {
-  let totalAmount;    
-  if(typeof percent === 'string' && typeof contribution === 'string' && typeof amount === 'string') {
+  let totalAmount;
+  let percentеConvert = +percent;
+  let contributionConvert = +contribution;
+  let amountConvert = +amount;  
+     
+  if(Number.isNaN(percentеConvert) || Number.isNaN(contributionConvert) || Number.isNaN(amountConvert)) {
+    let parameter;
+    let value;    
+    if(Number.isNaN(percentеConvert)) {
+    parameter = "Процентная ставка";
+    value = percent;                
+    } else if(Number.isNaN(contributionConvert)) {
+      parameter = "Начальный взнос";
+      value = contribution;
+    } else if(Number.isNaN(amountConvert)) {
+      parameter = "Общая стоимость";
+      value = amount;
+    }
+    totalAmount = `Параметр "${parameter}" содержит неправильное значение "${value}"`;
+  } else {
     percent = +percent / 100;
     contribution = +contribution;
     amount = +amount;
@@ -26,21 +44,10 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
     let bodyCredit = amount - contribution;
     let p = percent / 12;
     let payment = bodyCredit * (p + (p / (Math.pow(1 + p, months) - 1)));
-    totalAmount = parseFloat((payment * months).toFixed(2)); 
-  } else {
-    let parameter;
-    let value;    
-    if(typeof percent !== 'string') {
-    parameter = "percent";
-    value = percent;                
-    } else if(typeof contribution !== 'string') {
-      parameter = "contribution";
-      value = contribution;
-    } else if(typeof amount !== 'string') {
-      parameter = "amount";
-      value = amount;
-    }
-    totalAmount = `Параметр ${parameter} содержит неправильное значение ${value}`;    
+    totalAmount = parseFloat((payment * months).toFixed(2));
   }
   return totalAmount;
-}
+} 
+
+const nextYearDate = new Date(new Date().setFullYear(new Date().getFullYear() + 1))
+console.log(calculateTotalMortgage(10 , 0, 50000, nextYearDate));
