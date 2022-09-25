@@ -1,10 +1,8 @@
 "use strict";
 function solveEquation(a, b, c) {
-  let arr;
+  let arr = []
   let discriminant = Math.pow(b, 2) - 4 * a * c;
-  if(discriminant < 0) {
-    arr = [];
-  } else if (discriminant === 0) {
+  if (discriminant === 0) {
     arr = [(-b + Math.sqrt(discriminant)) / (2 * a)];
   } else if (discriminant > 0) {
     let x1 = (-b + Math.sqrt(discriminant) )/(2*a);
@@ -33,19 +31,19 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
       parameter = "Общая стоимость";
       value = amount;
     }
-    totalAmount = `Параметр "${parameter}" содержит неправильное значение "${value}"`;
-  } else {
-    percent = +percent / 100;
-    contribution = +contribution;
-    amount = +amount;
-    let currentDate = new Date();
-    let creditDate = new Date(date);
-    let months = (new Date(creditDate.getFullYear() - currentDate.getFullYear()) * 12) + (12 - currentDate.getMonth()) - (12 - creditDate.getMonth());
-    let bodyCredit = amount - contribution;
-    let p = percent / 12;
-    let payment = bodyCredit * (p + (p / (Math.pow(1 + p, months) - 1)));
-    totalAmount = parseFloat((payment * months).toFixed(2));
-  }
+    return `Параметр "${parameter}" содержит неправильное значение "${value}"`;
+  } 
+  percent = +percent / 100;
+  contribution = +contribution;
+  amount = +amount;
+  let currentDate = new Date();
+  let creditDate = new Date(date);
+  let months = (new Date(creditDate.getFullYear() - currentDate.getFullYear()) * 12) + (12 - currentDate.getMonth()) - (12 - creditDate.getMonth());
+  let bodyCredit = amount - contribution;
+  let p = percent / 12;
+  let payment = bodyCredit * (p + (p / (Math.pow(1 + p, months) - 1)));
+  totalAmount = parseFloat((payment * months).toFixed(2));
+  
   return totalAmount;
 } 
 
