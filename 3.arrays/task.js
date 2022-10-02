@@ -1,14 +1,9 @@
-function compareArrays(arr1, arr2) {
-  let result; 
-  if (arr1.length >= arr2.length) {
-    result = arr1.every((item, index) => item === arr2[index])
-  } else {
-    result = arr2.every((item, index) => item === arr1[index])
-  };
+function compareArrays(arr1, arr2) {  
+  let result = arr1.every((item, index) => arr1.length === arr2.length && item === arr2[index]);
   return result; // boolean
 }
 
 function advancedFilter(arr) {
-  let resultArr = arr.filter(number => number >= 0 && 1 / number !== -Infinity).filter(number => number % 3 === 0).map(number => number * 10);
+  let resultArr = arr.filter(number => number >= 0).filter(number => number % 3 === 0).map(number => number * 10);
   return resultArr; // array
 }
