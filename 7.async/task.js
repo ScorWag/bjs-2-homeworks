@@ -36,9 +36,9 @@ class AlarmClock {
         return `${hours}:${minutes}`;
     }
 
-    start() {
-        const currentTime = this.getCurrentFormattedTime();
-        function checkClock(clock) {            
+    start() {               
+        let checkClock = (clock) => {
+            const currentTime = this.getCurrentFormattedTime();
             if(currentTime === clock.time) {
                 clock.callback();
             }
