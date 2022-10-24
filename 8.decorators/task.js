@@ -26,19 +26,16 @@ function debounceDecoratorNew(func, delay) {
   wrapper.count = 0;    
   function wrapper(...args) {
     wrapper.allCount++;        
-    if(timeoutId === null) {
-      timeoutId = setTimeout(() => {        
+    if(timeoutId === null) {              
         func(...args);
-        wrapper.count++;
-      });        
-    } else {
+        wrapper.count++;              
+    }
     clearTimeout(timeoutId);
     timeoutId = null;
     timeoutId = setTimeout(() => {      
       func(...args);
       wrapper.count++;
-      }, delay)
-    }    
+      }, delay)      
   }  
   return wrapper;
 }
